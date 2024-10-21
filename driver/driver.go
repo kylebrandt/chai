@@ -13,6 +13,7 @@ import (
 	"github.com/chaisql/chai/internal/row"
 	"github.com/chaisql/chai/internal/types"
 	"github.com/cockroachdb/errors"
+	"github.com/grafana/grafana-plugin-sdk-go/backend"
 )
 
 func init() {
@@ -82,8 +83,9 @@ func (c *connector) Close() error {
 // conn represents a connection to the Chai database.
 // It implements the database/sql/driver.Conn interface.
 type conn struct {
-	db   *chai.DB
-	conn *chai.Connection
+	db          *chai.DB
+	conn        *chai.Connection
+	grafanaData backend.QueryDataResponse
 }
 
 // Prepare returns a prepared statement, bound to this connection.
